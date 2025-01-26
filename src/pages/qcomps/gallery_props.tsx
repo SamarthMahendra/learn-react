@@ -1,57 +1,62 @@
 // src/pages/qcomps/gallery_props.tsx
+
 import React from 'react';
-import { ProfileProps } from "@/types/profile";
-import Image from "next/image";
+import Image from 'next/image';
+import {Scientist, GalleryProps} from '@/types/gallery'
+
+const scientists: Scientist[] = [
+    {
+        name: 'Maria Skłodowska-Curie',
+        imageId: 'https://i.imgur.com/szV5sdGs.jpg',
+        profession: 'physicist and chemist',
+        awards: '4 (Nobel Prize in Physics, Nobel Prize in Chemistry, Davy Medal, Matteucci Medal)',
+        discovery: 'polonium (element)',
+    },
+    {
+        name: 'Katsuko Saruhashi',
+        imageId: 'https://i.imgur.com/YfeOqp2s.jpg',
+        profession: 'geochemist',
+        awards: '2 (Miyake Prize for geochemistry, Tanaka Prize)',
+        discovery: 'a method for measuring carbon dioxide in seawater',
+    },
+];
 
 export default function Gallery() {
-  return (
-      <div>
-        <h1>Notable Scientists</h1>
-        <Profile
-            name="Maria Skłodowska-Curie"
-            imgSrc="https://i.imgur.com/szV5sdGs.jpg"
-            altText="Maria Skłodowska-Curie"
-            profession="physicist and chemist"
-            awards="4 (Nobel Prize in Physics, Nobel Prize in Chemistry, Davy Medal, Matteucci Medal)"
-            discovery="polonium (element)"
-        />
-        <Profile
-            name="Katsuko Saruhashi"
-            imgSrc="https://i.imgur.com/YfeOqp2s.jpg"
-            altText="Katsuko Saruhashi"
-            profession="geochemist"
-            awards="2 (Miyake Prize for geochemistry, Tanaka Prize)"
-            discovery="a method for measuring carbon dioxide in seawater"
-        />
-      </div>
-  );
+    return (
+        <div>
+            <h1>Notable Scientists</h1>
+            {scientists.map((scientist) => (
+                <Profile key={scientist.name} scientist={scientist} size={70} />
+            ))}
+        </div>
+    );
 }
 
-function Profile({ name, imgSrc, altText, profession, awards, discovery }: ProfileProps) {
-  return (
-      <section className="profile">
-        <h2>{name}</h2>
-        <Image
-            src={imgSrc}
-            alt={altText}
-            width={70}
-            height={70}
-            priority
-        />
-        <ul>
-          <li>
-            <b>Profession: </b>
-            {profession}
-          </li>
-          <li>
-            <b>Awards: </b>
-            {awards}
-          </li>
-          <li>
-            <b>Discovered: </b>
-            {discovery}
-          </li>
-        </ul>
-      </section>
-  );
+function Profile({ scientist, size = 70 }: GalleryProps) {
+    return (
+        <section className="profile">
+            <h2>{scientist.name}</h2>
+            <Image
+                src={scientist.imageId}
+                alt={scientist.name}
+                width={size}
+                height={size}
+                priority
+            />
+            <ul>
+                <li>
+                    <b>Profession: </b>
+                    {scientist.profession}
+                </li>
+                <li>
+                    <b>Awards: </b>
+                    {scientist.awards}
+                </li>
+                <li>
+                    <b>Discovered: </b>
+                    {scientist.discovery}
+                </li>
+            </ul>
+        </section>
+    );
 }
