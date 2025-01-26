@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 export const people = [{
   id: 0,
   name: 'Creola Katherine Johnson',
@@ -17,8 +19,18 @@ function getImageUrl(imageId: string) {
 }
 export default function List() {
   const listItems = people.map(person =>
-    <li>
-    </li>
+      <li key={person.id}>
+        <Image
+            src={getImageUrl(person.imageId)}
+            alt={person.name}
+            width={100}
+            height={100}
+            priority
+        />
+        <p><strong>{person.name}</strong></p>
+        <p>{person.profession}</p>
+        <p>{person.accomplishment}</p>
+      </li>
   );
   return <ul>{listItems}</ul>;
 }
