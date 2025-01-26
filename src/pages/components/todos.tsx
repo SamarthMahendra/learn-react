@@ -13,6 +13,7 @@ export default function TodoList() {
   const imageUrl = `${baseUrl}${person.imageId}${person.imageSize}.jpg`;
   return (
     <div style={person.theme}>
+        {/* eslint-disable-next-line react/no-unescaped-entities */}
       <h1>{person.name}'s Todos</h1>
       <img className="avatar"
       src={`${baseUrl}${person.imageId}${person.imageSize}.jpg`}
